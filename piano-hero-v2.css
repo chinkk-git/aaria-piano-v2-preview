@@ -1,0 +1,187 @@
+/* Approved Piano Hero v2 art + two presentation shells around one shared player. */
+:root{--hero-gold:#ffe18f;--hero-purple:#2c0b5c;--hero-lilac:#bf7cff}
+body{background-color:#13052f;background-image:radial-gradient(ellipse at 50% 0,#53227c 0,#23104d 42%,#100629 100%)}
+main{background:linear-gradient(180deg,#10062940,#10062922 42%,#10062955)}
+.kingdom-brand{width:clamp(205px,27vw,360px);height:clamp(52px,8vh,82px);font-size:0;color:transparent;text-shadow:none;background:none;flex:none}
+.hero-stage{grid-template-columns:minmax(110px,15%) minmax(0,1fr);background-color:#19073d;background-image:radial-gradient(ellipse at 50% 8%,#6b36a966,transparent 58%),linear-gradient(145deg,#17072e,#32145d 52%,#12072b);background-repeat:no-repeat;background-position:right 1% 26%,right 0 bottom 2%,right 11% top 0,right top 0,center;background-size:18% auto,39% auto,31% auto,23% auto,cover}
+.hero-stage::before{background:radial-gradient(ellipse at 53% 60%,#b847ff18,transparent 56%),linear-gradient(180deg,#150a3520,transparent 45%,#0c092b42)}
+.aria-guide .avatar-frame{width:min(100%,230px);height:auto;aspect-ratio:500/416;min-height:0;border:0;border-radius:0;overflow:visible;background:transparent;box-shadow:none}
+.aria-guide .aria-avatar{position:absolute;inset:0;background:none;filter:none;mask-image:none}
+.aria-guide .avatar-crown{display:none}
+.aria-guide .aria-message{max-width:190px;border-color:#ffe19a99;background:#2b155cdd;font-size:clamp(10px,1vw,13px)}
+.highway-panel{grid-column:2;background-image:none}
+.highway-head{background:#24104ff5}
+#handStatus{display:none}
+.stage-legend{background:#180b3ff2}
+#openMySongs{width:58px;height:62px;min-width:58px;padding:0;border:0;background:transparent url('./assets/piano-hero-v2/home_button.png') center/contain no-repeat;color:transparent;box-shadow:none}
+#setupKeyboard{width:54px;height:62px;min-width:54px;padding:0;border:0;background:transparent url('./assets/piano-hero-v2/settings_button.png') center/contain no-repeat;color:transparent;box-shadow:none}
+#zoomKeys{width:68px;height:52px;min-height:44px;padding:0;border:0;background:none;color:#fff3c5;font-size:12px;box-shadow:none}
+#zoomKeys:focus-visible,#openMySongs:focus-visible,#setupKeyboard:focus-visible{outline:3px solid #fff1bd;outline-offset:2px}
+.keyboard-panel{box-shadow:0 -4px 24px #c360ff3d,0 8px 0 #27134e}
+.keyboard-panel .keys{filter:drop-shadow(0 7px 7px #09031999)}
+.keyboard-panel .white{border-color:#70438f;background:linear-gradient(#fffefa 0%,#f8eaff 72%,#d3b3ed 100%);box-shadow:inset 0 -5px #aa79ca,0 5px 0 #60367c}
+.keyboard-panel .black{background:linear-gradient(110deg,#65536f,#100a1c 54%,#453052);box-shadow:0 5px 0 #090510}
+.keyboard-panel .white.guide-lit,.keyboard-panel .black.guide-lit{filter:brightness(1.08)}
+.playback-mode-controls{display:flex;align-items:center;justify-content:center;gap:7px}
+.playback-mode-controls .mode-choice{min-height:42px;min-width:104px;padding:8px 14px;border:1px solid #f6d48d;border-radius:14px;background:linear-gradient(130deg,#7c3ac4,#382077);color:#fff;font-size:14px;font-weight:850;box-shadow:0 4px 14px #0b0628}
+#primaryModeButton{background:linear-gradient(130deg,#ffe58d,#f8b94e);color:#32124c;border-color:#fff4bd}
+#secondaryModeButton{background:linear-gradient(130deg,#7750aa,#413078)}
+#setupKeyboardInline{display:none!important}
+#countdown:not([hidden]){position:fixed;inset:20% 10%;z-index:50;border:1px solid #ffe18f;border-radius:24px;background:#160c49e8;backdrop-filter:blur(5px)}
+.piano-world-setting{padding:12px;border:1px solid #f5d58b99;border-radius:14px;background:#ffffff12}
+.piano-world-setting select{display:block;width:100%;margin-top:7px;min-height:46px}
+.keyboard-settings-details{display:grid;gap:13px;padding:12px;border-radius:14px;background:#ffffff0a}
+.keyboard-settings-details summary{color:#ffe4a4;font-weight:800;cursor:pointer}
+.classic-song-title{display:none}
+
+/* Classic keeps its own familiar screen and controls; only the shell changes. */
+html[data-piano-layout="classic"] body{background:#15112c; background-image:radial-gradient(ellipse at 50% 0,#4c2b85 0,#211445 34%,#0e0e2b 80%)}
+main[data-piano-layout="classic"]{height:100dvh;max-width:900px;display:grid;grid-template-rows:auto auto minmax(150px,1fr) auto;gap:7px;padding:max(8px,env(safe-area-inset-top)) 10px max(8px,env(safe-area-inset-bottom));overflow:hidden;background:transparent}
+main[data-piano-layout="classic"] .compact-title{order:1;min-height:42px;justify-content:flex-start;gap:8px;padding:3px 4px;color:#fff0ff}
+main[data-piano-layout="classic"] .kingdom-brand{display:none}
+main[data-piano-layout="classic"] .classic-song-title{display:block;order:-1;flex:1;min-width:85px;color:#ffe8aa;font-weight:850;font-size:clamp(14px,2vw,20px);text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+main[data-piano-layout="classic"] .top-favorite{margin-left:0}
+main[data-piano-layout="classic"] .hero-stage,main[data-piano-layout="classic"] .keyboard-panel,main[data-piano-layout="classic"] .highway-panel{display:contents}
+main[data-piano-layout="classic"] .aria-guide,main[data-piano-layout="classic"] .highway-head,main[data-piano-layout="classic"] .stage-legend,main[data-piano-layout="classic"] .keyboard-heading,main[data-piano-layout="classic"] .physical-range{display:none!important}
+main[data-piano-layout="classic"] #player{order:2;display:flex;flex-direction:column;gap:5px;margin:0;padding:9px 11px;border:1px solid #dfbaff42;border-radius:17px;background:linear-gradient(140deg,#ffffff18,#ffffff07);box-shadow:0 8px 24px #0004}
+main[data-piano-layout="classic"] .playback-mode-controls{order:1;justify-content:flex-start;gap:6px}
+main[data-piano-layout="classic"] .playback-mode-controls .mode-choice{min-width:84px;min-height:38px;padding:7px 12px;border-radius:12px;font-size:13px}
+main[data-piano-layout="classic"] #primaryModeButton{background:linear-gradient(130deg,#9d5cf0,#6e6bff);color:#fff;border-color:#ffffff44}
+main[data-piano-layout="classic"] #secondaryModeButton{background:#ffffff19;color:#fff;border-color:#ffffff44}
+main[data-piano-layout="classic"] .extras{order:3;justify-content:flex-start;gap:12px}
+main[data-piano-layout="classic"] #status{order:4;min-height:18px;text-align:left;color:#ffe3b4}
+main[data-piano-layout="classic"] .progress{order:5}
+main[data-piano-layout="classic"] #position{order:6;text-align:left}
+main[data-piano-layout="classic"] #rain{order:3;width:100%;height:100%;min-height:0!important;max-height:none!important;border:2px solid #dca8ff5c!important;border-radius:12px;background:#100c25!important;box-shadow:inset 0 0 24px #b84cff2b,0 0 28px #6c4ac844!important;touch-action:none}
+main[data-piano-layout="classic"] #keys{order:4;height:clamp(72px,14vh,115px);margin:0;filter:none}
+main[data-piano-layout="classic"] #keys .white{border-radius:0 0 9px 9px;font-size:clamp(8px,1.2vw,12px);background:linear-gradient(#fff,#c9d4e6);border:1px solid #444;box-shadow:none;color:#333}
+main[data-piano-layout="classic"] #keys .black{border-radius:0 0 8px 8px;background:linear-gradient(#333,#080808);box-shadow:none}
+main[data-piano-layout="classic"] #keys .lit,main[data-piano-layout="classic"] #keys .guide-lit{background:#f5bc50!important;color:#111!important;box-shadow:0 0 16px #ffe173!important}
+main[data-piano-layout="classic"] #restart,main[data-piano-layout="classic"] #prev,main[data-piano-layout="classic"] #next{min-height:38px}
+main[data-piano-layout="classic"] #countdown:not([hidden]){inset:20% 8%;min-height:200px}
+@media(max-width:900px) and (orientation:landscape){.kingdom-brand{width:clamp(175px,24vw,270px);height:clamp(45px,8vh,62px)}.aria-guide .avatar-frame{width:min(100%,180px)}main[data-piano-layout="hero"] .hero-stage{grid-template-columns:minmax(90px,13%) minmax(0,1fr)}main[data-piano-layout="hero"] .hero-stage{gap:5px;padding:5px}}
+@media(orientation:portrait){.kingdom-brand{width:min(58vw,280px);height:48px;background-position:center}main[data-piano-layout="hero"] .hero-stage{grid-template-columns:minmax(64px,20%) minmax(0,1fr);gap:4px;padding:4px}.aria-guide .avatar-frame{width:min(100%,155px)}#openMySongs,#setupKeyboard{width:43px;height:48px;min-width:43px}#zoomKeys{width:56px;height:42px}}
+@media(max-width:540px){.kingdom-brand{font-size:0;width:100%;height:38px;background-size:auto 38px}.aria-guide .avatar-frame{width:100%;min-height:0}.aria-guide .aria-message{display:none}main[data-piano-layout="hero"] .hero-stage{grid-template-columns:minmax(54px,18%) minmax(0,1fr);gap:2px;padding:3px}main[data-piano-layout="hero"] #player{padding:5px 6px}main[data-piano-layout="hero"] #restart,main[data-piano-layout="hero"] #prev,main[data-piano-layout="hero"] #next{display:none!important}main[data-piano-layout="hero"] .playback-mode-controls{gap:4px}main[data-piano-layout="hero"] .playback-mode-controls .mode-choice{min-width:88px;min-height:36px;padding:5px 8px;font-size:12px}main[data-piano-layout="classic"]{padding:5px;gap:4px}main[data-piano-layout="classic"] .panel{padding:6px}main[data-piano-layout="classic"] .controls button{padding:7px 8px}.classic-song-title{font-size:13px!important}}
+@media(max-height:600px) and (orientation:landscape){main[data-piano-layout="classic"]{grid-template-rows:auto auto minmax(100px,1fr) auto;padding:4px 8px;gap:4px}main[data-piano-layout="classic"] #keys{height:clamp(48px,14vh,72px)}main[data-piano-layout="hero"] .hero-stage{grid-template-columns:minmax(75px,12%) minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.hero-stage,.aria-guide .avatar-frame{animation:none!important}}
+/* Unified Magical Play Along keeps only its three primary playback actions. */
+main[data-piano-layout="hero"] #restart,
+main[data-piano-layout="hero"] #prev,
+main[data-piano-layout="hero"] #next{display:none!important}
+main[data-piano-layout="hero"] .hero-stage::before{pointer-events:none}
+main[data-piano-layout="classic"] .hero-stage::before{display:none}
+
+/* Owner correction: Hero is a single playable surface. Classic rules above are unchanged. */
+main[data-piano-layout="hero"]{height:100dvh;width:100%;max-width:none;grid-template-rows:auto minmax(0,1fr) auto;gap:4px;padding:max(4px,env(safe-area-inset-top)) max(5px,env(safe-area-inset-right)) max(4px,env(safe-area-inset-bottom)) max(5px,env(safe-area-inset-left));overflow:hidden}
+main[data-piano-layout="hero"] .accuracy{display:none}
+main[data-piano-layout="hero"] .compact-title{min-height:46px;height:46px;display:flex;flex-wrap:nowrap;justify-content:space-between;gap:6px;padding:2px 78px 2px 3px;overflow:hidden}
+main[data-piano-layout="hero"] .library-open,main[data-piano-layout="hero"] .top-favorite,main[data-piano-layout="hero"] #draftInfo,main[data-piano-layout="hero"] .classic-song-title{display:none!important}
+main[data-piano-layout="hero"] .song-picker{flex:1 1 190px;min-width:0;order:1}
+main[data-piano-layout="hero"] .song-picker select{width:100%;max-width:480px;min-width:0;min-height:42px;padding:5px 10px;font-size:clamp(12px,1.5vw,16px);font-weight:800}
+main[data-piano-layout="hero"] .kingdom-brand{position:static;left:auto;transform:none;order:2;flex:0 1 clamp(78px,16vw,184px);width:clamp(78px,16vw,184px);height:44px;background-size:contain}
+main[data-piano-layout="hero"] #addSongOpen{order:3;width:42px;height:42px;min-width:42px;padding:0;border-radius:13px;font-size:24px}
+main[data-piano-layout="hero"] #setupKeyboard{order:4;width:42px;height:42px;min-width:42px;padding:0;border-radius:13px}
+html[data-piano-layout="hero"] #installHelp{top:max(6px,env(safe-area-inset-top));right:6px;z-index:45;min-height:36px;padding:5px 7px;font-size:10px}
+main[data-piano-layout="hero"] .hero-game{grid-row:2;position:relative;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:0;overflow:hidden;border:2px solid #f0c979;border-radius:16px;background:#13072e;box-shadow:0 0 26px #bd70ff42,inset 0 0 22px #c86dff20}
+main[data-piano-layout="hero"] .hero-stage{grid-row:1;grid-column:1;min-height:0;min-width:0;padding:0;margin:0;border:0;border-radius:0;background-color:#13072e;background-image:linear-gradient(180deg,#1005223b,#16073368),radial-gradient(ellipse at 50% 0,#51227b 0,#1d0b42 56%,#100629 100%);background-repeat:no-repeat;background-position:center,center 45%,right 3% top 5%,left 4% top 18%,center;background-size:cover,min(58%,760px) auto,clamp(110px,20vw,300px) auto,clamp(110px,19vw,260px) auto,cover;overflow:hidden}
+main[data-piano-layout="hero"] .hero-stage{grid-template-columns:minmax(0,1fr)}
+main[data-piano-layout="hero"] .aria-guide{display:none!important}
+main[data-piano-layout="hero"] .highway-panel{grid-column:1;grid-row:1;min-height:0;min-width:0;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+main[data-piano-layout="hero"] .highway-head{min-height:28px;padding:4px 9px;background:linear-gradient(90deg,#29104dd9,#211044a8);border-bottom:1px solid #e3b66c66;font-size:clamp(11px,1.25vw,15px)}
+main[data-piano-layout="hero"] .highway-head span{font-size:clamp(11px,1.2vw,14px)}
+main[data-piano-layout="hero"] #handStatus,main[data-piano-layout="hero"] .stage-legend{display:none!important}
+main[data-piano-layout="hero"] .keyboard-heading{min-height:28px;margin:0;padding:2px 8px;display:flex;align-items:center;justify-content:space-between;gap:6px;background:linear-gradient(90deg,#28144fdb,#24104bd0);border-bottom:1px solid #efd08a66;color:#fff0bf}
+main[data-piano-layout="hero"] .keyboard-heading>div:first-child{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap}
+main[data-piano-layout="hero"] .keyboard-heading b{font-size:clamp(11px,1.4vw,15px)}
+main[data-piano-layout="hero"] .keyboard-heading span{font-size:clamp(9px,1.1vw,12px)}
+main[data-piano-layout="hero"] .keyboard-range-label{padding:2px 6px;border-radius:8px;background:#ffffff12;color:#f5d8ff}
+main[data-piano-layout="hero"] .keyboard-actions{gap:5px}
+main[data-piano-layout="hero"] .keyboard-actions button{min-height:25px;padding:2px 6px;font-size:10px}
+main[data-piano-layout="hero"] .keyboard-actions #setupKeyboardInline{display:none!important}
+main[data-piano-layout="hero"] .hand-toggle{font-size:10px}
+main[data-piano-layout="hero"] .rain{display:block;width:100%;height:100%;min-height:0!important;max-height:none!important;margin:0;padding:0;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;touch-action:none}
+main[data-piano-layout="hero"] .keyboard-panel{grid-row:2;grid-column:1;height:clamp(88px,16vh,148px);min-height:0;margin:0;padding:0;border:0;border-top:2px solid #f3d085;border-radius:0;background:linear-gradient(180deg,#43246c,#241247);box-shadow:0 -5px 22px #ffcf7048;display:grid;grid-template-rows:minmax(0,1fr) auto;overflow:hidden}
+main[data-piano-layout="hero"] .keyboard-panel .keys{width:100%;height:auto;min-height:0;margin:0;overflow:hidden;filter:none;justify-content:stretch;transition:opacity .16s ease,transform .16s ease}
+main[data-piano-layout="hero"] .physical-range{margin:0 3px 2px;font-size:9px;line-height:11px}
+main[data-piano-layout="hero"] .keyboard-panel .keys.range-shift{opacity:.16;transform:scaleY(.94)}
+main[data-piano-layout="hero"] .keyboard-panel .white{min-width:0;border-radius:0 0 8px 8px;padding:0 1px 5px;font-size:clamp(8px,1.2vw,15px);background:linear-gradient(#fffefa 0%,#f8eaff 72%,#d3b3ed 100%);border-color:#70438f;box-shadow:inset 0 -4px #aa79ca,0 4px 0 #60367c}
+main[data-piano-layout="hero"] .keyboard-panel .black{height:57%;font-size:clamp(7px,.72vw,10px);border-radius:0 0 6px 6px;box-shadow:0 4px 0 #090510}
+main[data-piano-layout="hero"] .keyboard-panel .white.middle-c{outline:2px solid #ffdf7b;outline-offset:-3px}
+main[data-piano-layout="hero"] .keyboard-panel .white.guide-lit,main[data-piano-layout="hero"] .keyboard-panel .black.guide-lit{filter:brightness(1.26);box-shadow:0 0 18px #ffe173,inset 0 -4px #db9019!important}
+main[data-piano-layout="hero"] .physical-range{display:none!important}
+main[data-piano-layout="hero"] #player{grid-row:3;min-width:0;min-height:0;margin:0;padding:5px 9px;display:grid;grid-template-columns:minmax(180px,1fr) auto minmax(140px,1fr);grid-template-rows:auto auto;align-items:center;gap:3px 10px;border:1px solid #e5c77c;border-radius:14px;background:linear-gradient(110deg,#32185c,#1e1248 58%,#301756);box-shadow:0 0 18px #b264ff36}
+main[data-piano-layout="hero"] .playback-mode-controls{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:center;gap:6px}
+main[data-piano-layout="hero"] .playback-mode-controls .mode-choice{min-width:94px;min-height:38px;padding:5px 10px;font-size:12px}
+main[data-piano-layout="hero"] #pause{min-height:38px;padding:5px 10px;font-size:12px}
+main[data-piano-layout="hero"] .extras{grid-column:1 / 4;grid-row:2;display:flex;justify-content:space-between;gap:10px;margin:0}
+main[data-piano-layout="hero"] .extras label{font-size:11px;white-space:nowrap}
+main[data-piano-layout="hero"] .extras input[type="range"]{width:clamp(70px,13vw,180px)}
+main[data-piano-layout="hero"] .extras select{min-height:30px;padding:3px 7px;font-size:11px}
+main[data-piano-layout="hero"] #barLabel{margin-left:auto}
+main[data-piano-layout="hero"] #status{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+main[data-piano-layout="hero"] .progress{grid-column:1 / 4;grid-row:3;height:3px;margin:0}
+main[data-piano-layout="hero"] #position{grid-column:1 / 4;grid-row:4;min-height:0;margin:0;text-align:center;font-size:10px;color:#f3ddaa}
+main[data-piano-layout="hero"] #restart,main[data-piano-layout="hero"] #prev,main[data-piano-layout="hero"] #next{display:none!important}
+main[data-piano-layout="hero"] #countdown:not([hidden]){position:absolute;inset:58px 10px 0;z-index:5;min-height:0;border:0;border-radius:12px;background:#13062e9c;backdrop-filter:blur(4px)}
+main[data-piano-layout="classic"] .hero-game{display:contents}
+@media(max-width:800px){main[data-piano-layout="hero"]{gap:3px}main[data-piano-layout="hero"] .hero-stage{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0;padding:0}main[data-piano-layout="hero"] .hero-game{grid-template-rows:minmax(0,1fr) auto}main[data-piano-layout="hero"] .keyboard-panel{height:clamp(82px,13vh,126px)}main[data-piano-layout="hero"] #player{grid-template-columns:minmax(120px,1fr) auto minmax(100px,1fr);padding:5px 7px}}
+@media(max-width:540px){main[data-piano-layout="hero"] .compact-title{height:42px;min-height:42px;gap:3px;padding-right:76px}main[data-piano-layout="hero"] .song-picker{flex-basis:0}main[data-piano-layout="hero"] .song-picker select{min-height:37px;padding:4px 6px;font-size:11px}main[data-piano-layout="hero"] .kingdom-brand{flex-basis:70px;width:70px;height:35px}main[data-piano-layout="hero"] #addSongOpen,main[data-piano-layout="hero"] #setupKeyboard{width:34px;height:36px;min-width:34px;border-radius:10px}main[data-piano-layout="hero"] .keyboard-heading{min-height:24px;padding:1px 4px}main[data-piano-layout="hero"] .keyboard-heading>div:first-child{gap:4px}main[data-piano-layout="hero"] .keyboard-heading b{font-size:10px}main[data-piano-layout="hero"] .keyboard-heading span{font-size:8px}main[data-piano-layout="hero"] .keyboard-actions{gap:2px}main[data-piano-layout="hero"] .hand-toggle{font-size:8px;gap:2px}main[data-piano-layout="hero"] .keyboard-actions button{min-height:23px;padding:1px 4px;font-size:9px}main[data-piano-layout="hero"] .keyboard-panel{height:clamp(72px,10.8vh,92px)}main[data-piano-layout="hero"] .keyboard-panel .white{font-size:clamp(7px,2vw,10px);padding-bottom:3px}main[data-piano-layout="hero"] .keyboard-panel .black{font-size:7px}main[data-piano-layout="hero"] #player{grid-template-columns:1fr;grid-template-rows:auto auto auto auto;padding:4px 6px;gap:2px}main[data-piano-layout="hero"] .playback-mode-controls{grid-row:1;grid-column:1}main[data-piano-layout="hero"] .playback-mode-controls .mode-choice{min-width:82px;min-height:34px;padding:4px 7px;font-size:11px}main[data-piano-layout="hero"] #pause{min-height:34px;padding:4px 7px;font-size:11px}main[data-piano-layout="hero"] .extras{grid-row:2;grid-column:1;justify-content:space-between;gap:4px}main[data-piano-layout="hero"] .extras label{font-size:9px}main[data-piano-layout="hero"] .extras input[type="range"]{width:70px}main[data-piano-layout="hero"] .extras select{min-height:25px;font-size:10px;padding:1px 4px}main[data-piano-layout="hero"] #barLabel{margin-left:0}main[data-piano-layout="hero"] .progress{grid-row:3;grid-column:1}main[data-piano-layout="hero"] #position{grid-row:4;grid-column:1;font-size:9px}main[data-piano-layout="hero"] #installHelp{top:3px;right:3px;min-height:31px;padding:3px 5px;font-size:9px}}
+@media(orientation:landscape) and (max-height:540px){main[data-piano-layout="hero"]{grid-template-rows:auto minmax(0,1fr) auto;gap:2px;padding:2px 5px}main[data-piano-layout="hero"] .compact-title{height:36px;min-height:36px}main[data-piano-layout="hero"] .hero-game{grid-template-rows:minmax(0,1fr) auto}main[data-piano-layout="hero"] .keyboard-panel{height:clamp(48px,12vh,68px);grid-template-rows:minmax(0,1fr)}main[data-piano-layout="hero"] .physical-range{display:none}main[data-piano-layout="hero"] .keyboard-heading{min-height:20px}main[data-piano-layout="hero"] .keyboard-heading b{font-size:10px}main[data-piano-layout="hero"] #player{grid-template-columns:minmax(120px,1fr) auto minmax(100px,1fr);grid-template-rows:28px 25px;padding:2px 6px;gap:1px 5px}main[data-piano-layout="hero"] .playback-mode-controls .mode-choice,main[data-piano-layout="hero"] #pause{min-height:26px;padding:2px 7px}main[data-piano-layout="hero"] .extras{grid-row:2}main[data-piano-layout="hero"] .extras label{font-size:9px}main[data-piano-layout="hero"] #position{display:none}}
+
+/* v1.10: the canvas is absolutely fitted to its allocated grid track. Its intrinsic
+   2:1 ratio previously let it overflow the 1fr track and put the hit line below
+   the clipped playfield. */
+main[data-piano-layout="hero"] .hero-stage{grid-template-columns:minmax(0,1fr)}
+main[data-piano-layout="hero"] .highway-panel{grid-template-rows:auto auto minmax(0,1fr)}
+main[data-piano-layout="hero"] .highway-playfield{grid-row:3;position:relative;min-width:0;min-height:0;overflow:hidden}
+main[data-piano-layout="hero"] .rain{position:absolute;inset:0;display:block;width:100%;height:100%;aspect-ratio:auto;min-width:0;min-height:0!important;max-width:100%;max-height:100%!important;margin:0;padding:0;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;touch-action:none}
+main[data-piano-layout="classic"] .highway-playfield{display:contents}
+main[data-piano-layout="hero"] #countdown:not([hidden]){position:absolute;inset:0;z-index:5;min-height:0;border:0;border-radius:0;background:#13062e9c;backdrop-filter:blur(4px)}
+main[data-piano-layout="hero"] .keyboard-panel{border-top:0}
+main[data-piano-layout="hero"] .compact-title{min-width:0}
+main[data-piano-layout="hero"] .hero-stage{background-position:center,center 30%,right 3% top 5%,left 4% top 18%,center;background-size:cover,min(84%,980px) auto,clamp(110px,20vw,300px) auto,clamp(110px,19vw,260px) auto,cover}
+@media(max-width:540px){main[data-piano-layout="hero"] .compact-title{display:grid;grid-template-columns:minmax(0,1fr) 34px 34px;gap:3px;padding:2px 78px 2px 3px}main[data-piano-layout="hero"] .song-picker{grid-column:1;grid-row:1;min-width:0;flex:none}main[data-piano-layout="hero"] .song-picker select{width:100%;max-width:none}main[data-piano-layout="hero"] .kingdom-brand{display:none}main[data-piano-layout="hero"] #addSongOpen{grid-column:2;grid-row:1;order:initial}main[data-piano-layout="hero"] #setupKeyboard{grid-column:3;grid-row:1;order:initial}}
+/* Hero v1.11: one header, one integrated playfield, one compact control band. */
+html[data-piano-layout="hero"] body{background:#13052f;background-image:radial-gradient(ellipse at 50% 0,#53227c 0,#23104d 42%,#100629 100%)}
+main[data-piano-layout="hero"]{height:100dvh;width:100%;max-width:none;grid-template-rows:auto minmax(0,1fr) auto;gap:4px;padding:max(4px,env(safe-area-inset-top)) max(5px,env(safe-area-inset-right)) max(4px,env(safe-area-inset-bottom)) max(5px,env(safe-area-inset-left));overflow:hidden}
+main[data-piano-layout="hero"] .accuracy,main[data-piano-layout="hero"] .library-open,main[data-piano-layout="hero"] .top-favorite,main[data-piano-layout="hero"] .kingdom-brand,main[data-piano-layout="hero"] #draftInfo,main[data-piano-layout="hero"] .classic-song-title{display:none!important}
+main[data-piano-layout="hero"] .compact-title{grid-row:1;min-height:46px;height:46px;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:6px;padding:2px 74px 2px 4px;overflow:hidden}
+main[data-piano-layout="hero"] .song-picker{min-width:0;width:100%;order:0}
+main[data-piano-layout="hero"] .song-picker select{width:100%;max-width:none;min-width:0;min-height:40px;padding:5px 9px;font-size:clamp(12px,1.4vw,16px);font-weight:800;border-color:#e8c579;background:linear-gradient(120deg,#39215f,#211442);color:#fff1c5}
+main[data-piano-layout="hero"] #zoomKeys{order:1;background:none!important;width:auto;min-width:76px;height:38px;min-height:38px;padding:4px 8px;font-size:11px;white-space:nowrap}
+main[data-piano-layout="hero"] #setupKeyboard{order:2;width:40px;height:40px;min-width:40px;padding:0;border:1px solid #f1d080;border-radius:12px;background:linear-gradient(135deg,#6b3c91,#342057);background-image:none!important;color:#ffe5a0;font-size:21px;box-shadow:0 0 12px #c778ff38}
+main[data-piano-layout="hero"] #addSongOpen{order:3;width:40px;height:40px;min-width:40px;padding:0;border:1px solid #f1d080;border-radius:12px;background:linear-gradient(135deg,#7a49aa,#40246c);color:#fff2bf;font-size:23px}
+main[data-piano-layout="hero"] .hero-game{grid-row:2;position:relative;min-height:0;min-width:0;display:block;margin:0;overflow:hidden;border:1px solid #e5c77c;border-radius:14px;background:linear-gradient(150deg,#16072e,#2c1555 52%,#120829);box-shadow:0 0 24px #bd70ff32,inset 0 0 18px #c86dff14}
+main[data-piano-layout="hero"] .hero-stage{width:100%;height:100%;display:block;min-height:0;background:none!important;background-image:none!important}
+main[data-piano-layout="hero"] .hero-playfield{--keybed-height:clamp(82px,16dvh,142px);position:absolute;inset:0;min-width:0;min-height:0;overflow:hidden;background:radial-gradient(ellipse at 50% 2%,#b36fff14,transparent 58%),repeating-linear-gradient(90deg,#d8b5ff08 0 1px,transparent 1px 14%)}
+main[data-piano-layout="hero"] .hero-playfield:before{content:"";position:absolute;inset:0 0 var(--keybed-height);z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 0,#e9c9ff13,transparent 64%),linear-gradient(180deg,transparent 70%,#ffd2730b);animation:hero-atmosphere 8s ease-in-out infinite alternate}
+@keyframes hero-atmosphere{from{opacity:.45}to{opacity:.9}}
+main[data-piano-layout="hero"] #rain{position:absolute;z-index:2;top:0;left:0;right:0;bottom:auto;height:calc(100% - var(--keybed-height));width:100%;min-width:0;min-height:0!important;max-width:none;max-height:none!important;margin:0;padding:0;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;aspect-ratio:auto;touch-action:none}
+main[data-piano-layout="hero"] #keys{transition:opacity .16s ease,transform .16s ease;position:absolute;z-index:3;left:0;right:0;bottom:0;width:100%;height:var(--keybed-height);min-height:0;margin:0;padding:0;display:flex;overflow:hidden;touch-action:manipulation;border:0;border-top:2px solid #ffe18f;border-radius:0 0 12px 12px;background:linear-gradient(180deg,#4b2a70,#21103f);box-shadow:0 -5px 22px #ffc75c55}
+main[data-piano-layout="hero"] #keys .white{position:relative;z-index:1;flex:1 1 0;min-width:0;height:100%;margin:0;padding:0 1px 5px;border:1px solid #795197;border-top:0;border-radius:0 0 7px 7px;background:linear-gradient(#fffef9 0%,#f1e4ff 78%,#cba7e7);color:#25113d;font-size:clamp(8px,1.15vw,14px);font-weight:700;box-shadow:inset 0 -4px #a87bc4,0 4px 0 #30164a}
+main[data-piano-layout="hero"] #keys .black{position:absolute;top:0;height:58%;min-width:0;z-index:2;margin:0;padding:0 0 4px;border:1px solid #ba9bd0;border-top:0;border-radius:0 0 5px 5px;background:linear-gradient(110deg,#765987,#130b20 55%,#49365b);color:#fff2c7;font-size:clamp(7px,.68vw,10px);box-shadow:0 4px 0 #090510}
+main[data-piano-layout="hero"] #keys .white.middle-c{outline:2px solid #ffde7a;outline-offset:-4px}
+main[data-piano-layout="hero"] #keys .guide-lit,main[data-piano-layout="hero"] #keys .lit{filter:brightness(1.3);box-shadow:0 0 17px #ffe173,inset 0 -4px #e19b32!important}
+main[data-piano-layout="hero"] #countdown:not([hidden]){position:absolute;z-index:6;inset:0;display:flex;align-items:center;justify-content:center;gap:14px;background:#1206299c;backdrop-filter:blur(3px);color:#fff1c6}
+main[data-piano-layout="hero"] #countdown strong{font-size:clamp(48px,10vw,96px);color:#ffe28b;text-shadow:0 0 26px #ffbf4d,0 0 50px #dc67ff}
+main[data-piano-layout="hero"] #player{grid-row:3;position:relative;min-width:0;min-height:0;margin:0;padding:5px 8px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:auto auto;align-items:center;gap:3px 8px;border:1px solid #e5c77c;border-radius:12px;background:linear-gradient(110deg,#32185c,#1e1248 58%,#301756);box-shadow:0 0 16px #b264ff2b}
+main[data-piano-layout="hero"] .playback-mode-controls{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:center;gap:5px}
+main[data-piano-layout="hero"] .playback-mode-controls .mode-choice,main[data-piano-layout="hero"] #pause{min-width:76px;min-height:36px;padding:5px 9px;font-size:11px;white-space:nowrap}
+main[data-piano-layout="hero"] .extras{grid-column:1/4;grid-row:2;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0}
+main[data-piano-layout="hero"] .extras label{font-size:10px;white-space:nowrap}
+main[data-piano-layout="hero"] .extras input[type="range"]{width:clamp(58px,12vw,150px)}
+main[data-piano-layout="hero"] .extras select{min-height:28px;padding:3px 6px;font-size:10px}
+main[data-piano-layout="hero"] #barLabel{margin-left:auto}
+main[data-piano-layout="hero"] #status{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+main[data-piano-layout="hero"] .progress{grid-column:1/4;grid-row:3;height:2px;margin:0}
+main[data-piano-layout="hero"] #position{grid-column:1/4;grid-row:4;min-height:0;margin:0;text-align:center;font-size:9px;color:#f3ddaa}
+main[data-piano-layout="hero"] #restart,main[data-piano-layout="hero"] #prev,main[data-piano-layout="hero"] #next,main[data-piano-layout="hero"] #setupKeyboardInline{display:none!important}
+main[data-piano-layout="classic"] .hero-playfield{display:contents}
+main[data-piano-layout="classic"] .hero-zoom{display:none!important}
+main[data-piano-layout="classic"] #rain{position:static}
+main[data-piano-layout="classic"] #keys{position:relative}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media(max-width:700px){main[data-piano-layout="hero"]{gap:3px}main[data-piano-layout="hero"] .compact-title{height:42px;min-height:42px;grid-template-columns:minmax(0,1fr) auto auto auto;gap:4px;padding:1px 65px 1px 2px}main[data-piano-layout="hero"] #zoomKeys{min-width:64px;height:36px;min-height:36px;padding:3px 5px;font-size:10px}main[data-piano-layout="hero"] #setupKeyboard,main[data-piano-layout="hero"] #addSongOpen{width:36px;height:36px;min-width:36px}main[data-piano-layout="hero"] .song-picker select{min-height:36px;padding:4px 6px;font-size:11px}main[data-piano-layout="hero"] .hero-playfield{--keybed-height:clamp(76px,13dvh,112px)}main[data-piano-layout="hero"] #player{grid-template-columns:1fr;grid-template-rows:auto auto auto;padding:3px 5px;gap:2px}main[data-piano-layout="hero"] .playback-mode-controls{grid-column:1;grid-row:1;gap:4px}main[data-piano-layout="hero"] .playback-mode-controls .mode-choice,main[data-piano-layout="hero"] #pause{min-width:72px;min-height:34px;padding:4px 7px;font-size:10px}main[data-piano-layout="hero"] .extras{grid-column:1;grid-row:2;justify-content:space-between;gap:4px}main[data-piano-layout="hero"] .extras label{font-size:9px}main[data-piano-layout="hero"] .extras input[type="range"]{width:62px}main[data-piano-layout="hero"] .extras select{min-height:24px;font-size:9px;padding:1px 4px}main[data-piano-layout="hero"] #barLabel{margin-left:0}main[data-piano-layout="hero"] .progress{grid-row:3;grid-column:1}main[data-piano-layout="hero"] #position{grid-row:4;grid-column:1;font-size:8px}main[data-piano-layout="hero"] #installHelp{top:3px;right:3px;min-height:29px;padding:2px 4px;font-size:8px}}
+@media(orientation:landscape) and (max-height:540px){main[data-piano-layout="hero"]{gap:2px;padding:2px 5px}main[data-piano-layout="hero"] .compact-title{height:34px;min-height:34px}main[data-piano-layout="hero"] .hero-playfield{--keybed-height:clamp(56px,19vh,86px)}main[data-piano-layout="hero"] #player{grid-template-columns:minmax(70px,1fr) auto minmax(0,1fr);grid-template-rows:auto auto;padding:2px 5px;gap:1px 5px}main[data-piano-layout="hero"] .playback-mode-controls .mode-choice,main[data-piano-layout="hero"] #pause{min-height:28px;padding:3px 6px;font-size:10px}main[data-piano-layout="hero"] .extras{grid-column:1/4;grid-row:2}main[data-piano-layout="hero"] .extras label{font-size:8px}main[data-piano-layout="hero"] #position{display:none}}
+main[data-piano-layout="hero"] .aria-guide{display:none!important}
+main[data-piano-layout="hero"] #keys.range-shift{opacity:.22;transform:scaleY(.96)}
